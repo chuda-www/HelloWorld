@@ -2,12 +2,13 @@ package com.my;
 
 public class Message {
 
-    private String t;
+    private String text;
 
-    public void setT(String text) {
-        t=text;
+    public void setText(String text) {
+        this.text = text;
     }
-    public String getT() {
-        return t;
+
+    public String getText() {
+        return text;
     }
 }
