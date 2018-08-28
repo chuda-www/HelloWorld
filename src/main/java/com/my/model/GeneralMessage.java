@@ -2,8 +2,8 @@ package com.my.model;
 
 public class GeneralMessage {
 
-    public String text;
-    public String name;
+    private String text;
+    private String name;
 
     public void setText(String text) {
         this.text = text;
