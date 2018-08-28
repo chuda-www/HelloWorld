@@ -11,6 +11,7 @@ public class InverseMessageTest {
         message.setName("Someone's name ");
         message.setText("Hello!!!");
         String result = message.getNameText();
+
         assertEquals("Someone's name Hello!!!", result);
     }
 }
