@@ -1,7 +1,6 @@
 package com.my.model;
 
-public class Message {
-
+public class InverseMessage {
     private String text;
     private String name;
 
@@ -13,17 +12,16 @@ public class Message {
         return text;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getTextName() {
-        return text + name;
+    public String getName() {
+        return name;
     }
 
+    public String getNameText() {
+        return name + text;
+    }
 }
 
