@@ -11,7 +11,6 @@ public class PrintMessageAppTest {
     public void messageOut () {
         String text = "Какой-то текст";
         String name = "Какое-то имя";
-        String message1;
         MessageOut messageOut = new MessageOut();
         String result = messageOut.outMessage(text, name);
         assertEquals("Какой-то текстКакое-то имя", result);
@@ -19,12 +18,11 @@ public class PrintMessageAppTest {
     }
     @Test
     public void inverseMessageOut () {
-        String text = "Какой-то текст";
-        String name = "Какое-то имя";
-        String message2;
+        String text = "текст";
+        String name = "имя";
         InverseMessageOut inverseMessageOut = new InverseMessageOut();
         String result = inverseMessageOut.outMessage(text, name);
-        assertEquals("Какое-то имяКакой-то текст", result);
+        assertEquals("имятекст", result);
     }
 
 }
