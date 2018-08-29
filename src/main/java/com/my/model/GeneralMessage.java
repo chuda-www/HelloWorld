@@ -20,5 +20,4 @@ public class GeneralMessage {
     public String getName() {
         return name;
     }
-
 }
