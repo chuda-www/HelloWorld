@@ -24,6 +24,16 @@ public class PrintMessageAppTest {
         String result = inverseMessageOut.outMessage(text, name);
         assertEquals("имятекст", result);
     }
+    @Test
+    public void main () {
+        String text = "Какой-то текст";
+        String name = "Какое-то имя";
+        String message1;
+        MessageOut messageOut = new MessageOut();
+        message1 = messageOut.outMessage(text, name);
+        String result= message1;
+        assertEquals(message1,result);
+    }
 
 }
 
