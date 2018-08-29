@@ -5,7 +5,9 @@ public class GeneralMessage {
     private String text;
     private String name;
 
-    public void setText(String text) { this.text = text; }
+    public void setText(String text) {
+        this.text = text;
+    }
 
     public String getText() {
         return text;
@@ -15,5 +17,7 @@ public class GeneralMessage {
         this.name = name;
     }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 }
