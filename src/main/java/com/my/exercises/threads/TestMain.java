@@ -1,77 +1,77 @@
 package com.my.exercises.threads;
 
 public class TestMain {
+    static CounterMain counter = new CounterMain();
 
     public static void main(String[] args) {
-       CounterMain counterMain = new CounterMain();
 
-        ThreadFirst threadOne = new ThreadFirst();
+        ThreadFirst threadOne = new ThreadFirst(counter);
         threadOne.setName("поток первый");
         threadOne.start();
 
-        ThreadSecond threadTwo = new ThreadSecond();
-        threadOne.setName("поток второй");
+        ThreadSecond threadTwo = new ThreadSecond(counter);
+        threadTwo.setName("поток второй");
         threadTwo.start();
     }
+
 }
 
 class CounterMain {
     public Integer count = 0;
-    synchronized public void inc() {
+
+    public void inc() {
         count++;
        System.out.println("Started Thread number:" + Thread.currentThread().getName() + ":" + count);
     }
 }
 
 class ThreadFirst extends Thread {
-    CounterMain counter = new CounterMain();
+    CounterMain counter;
 
-    public ThreadFirst() {
+    public ThreadFirst(CounterMain counter) {
         this.counter = counter;
     }
 
     @Override
     public void run() {
         synchronized (counter) {
-        for (int i = 0; i <= 1000; i++) {
-            while (i % 2 != 0) {
-                notify();
-                System.out.println("Первый поток ждет от счетчика нечетное значение");
-                counter.inc();
-            }
-            while (i % 2 == 0){
-                try {
-                    wait(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-}}
-
-class ThreadSecond extends Thread {
-    CounterMain counter = new CounterMain();
-
-    public ThreadSecond() {
-        this.counter = counter;
-    }
-    @Override
-    public void run() {
-        synchronized (counter) {
-            for (int i = 0; i <= 1000; i++) {
-                while (i % 2 == 0) {
-                    notify();
-                    System.out.println("Второй поток ждет четное значение");
-                    counter.inc();
-                }
-                while (i % 2 != 0) {
+            for (int i = 0; i <= 100; i++) {
+                if (counter.count % 2 == 0) {
+                    System.out.println("Первый поток ждет от счетчика нечетное значение");
                     try {
-                        wait(500);
+                        counter.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
+                counter.inc();
+                counter.notify();
+            }
+        }
+    }
+}
+
+class ThreadSecond extends Thread {
+    CounterMain counter;
+
+    public ThreadSecond(CounterMain counter) {
+        this.counter = counter;
+    }
+
+    @Override
+    public void run() {
+        synchronized (counter) {
+            for (int i = 0; i <= 100; i++) {
+                    if(counter.count % 2 != 0) {
+                    System.out.println("Второй поток ждет четное значение");
+                    try {
+                        counter.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                counter.inc();
+                counter.notify();
             }
         }
     }
