@@ -17,7 +17,5 @@ public class PrintMessageApp {
         message2=inverseMessageOut.outMessage(text,name);
         System.out.println(message1);
         System.out.println(message2);
-
-
     }
 }

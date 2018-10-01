@@ -1,4 +1,4 @@
-package com.my.exercises.myrun;
+package com.my.exercises.threads;
 
 public class MainWait {
 

@@ -1,4 +1,4 @@
-package com.my.exercises;
+package com.my.exercises.mysorting;
 import java.util.Arrays;
 
 public class UserSorting {
@@ -7,8 +7,8 @@ public class UserSorting {
 
         User[] users = getUsers();
       User[] sort = bubbleSort(users);
-      //  User[] sort = mergeSort(users);
-   //     User[] sort = insertionSort(users);
+//        User[] sort = mergeSort(users);
+//        User[] sort = insertionSort(users);
 
         for (User user : sort) {
             System.out.println(user.getName() + " " + user.getAge());

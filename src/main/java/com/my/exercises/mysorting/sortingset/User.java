@@ -1,4 +1,4 @@
-package com.my.exercises.sortedset;
+package com.my.exercises.mysorting.sortingset;
 
 public class User implements Comparable <User> {
     private String name;

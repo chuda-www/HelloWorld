@@ -1,4 +1,4 @@
-package com.my.exercises;
+package com.my.exercises.mysorting;
 
 public class User implements Comparable<User>{
     private String name;
@@ -24,14 +24,13 @@ public class User implements Comparable<User>{
         this.age = age;
             }
     @Override
-    public int compareTo(User anotherUser)
+    public int compareTo(User anotherUser){
 
 //        if (this.age < anotherUser.age) return -1;
 //        if (this.age > anotherUser.age) return 1;
 //        return 0;
 
-    {
-        if (this.age == anotherUser.age) {
+          if (this.age == anotherUser.age) {
             return 0;
         } else if (this.age < anotherUser.age) {
             return -1;
@@ -44,9 +43,6 @@ public class User implements Comparable<User>{
     public String toString() {
         return name + " "+ age;
     }
-
+}
 ////        String[] name = {"Viktoryia","Denis","Viktor","Dmitry","Olga"};
 ////        int[] age = {35,36,25,32,37};
-
-
-}

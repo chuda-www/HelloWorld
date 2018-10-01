@@ -1,10 +1,5 @@
-package com.my.exercises;
-
+package com.my.exercises.mysorting;
 import java.util.Arrays;
-
-import static java.util.Arrays.sort;
-
-import java.util.Scanner;
 
 public class MySorting {
     static int counter = 0;
@@ -12,13 +7,12 @@ public class MySorting {
     public static void main(String[] args) {
         int[] m = {3, 5, 10, 2, 7, 1, 11, 7, 4, 8, 2, 0};
         int[] sort = bubbleSort(m);
-//        int[] sort = mergeSort(m);
+        // int[] sort = mergeSort(m);
         // int[] sort = insertionSort(m);
 
         for (int n : sort) {
             System.out.println(n);
         }
-
         System.out.println("Количество итераций: " + counter);
     }
 
@@ -28,7 +22,6 @@ public class MySorting {
             for (int j = i - 1; j >= 0; j--) {
                 counter++;
                 int leftNum = unsortedArray[j];
-
                 if (num < leftNum) {
                     unsortedArray[j + 1] = leftNum;
                     unsortedArray[j] = num;
@@ -39,7 +32,6 @@ public class MySorting {
         }
         return unsortedArray;
     }
-
     //рекурсивная функция сортировки частей массива
     public static int[] mergeSort(int[] unsortedArray) {
         if (unsortedArray.length < 2)
@@ -91,6 +83,5 @@ public class MySorting {
         }
         return unsortedArray;
     }
-
 }
 

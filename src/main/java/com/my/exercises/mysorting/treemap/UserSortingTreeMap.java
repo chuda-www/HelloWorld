@@ -1,4 +1,4 @@
-package com.my.exercises.treemap;
+package com.my.exercises.mysorting.treemap;
 
 import java.util.Map;
 import java.util.TreeMap;

@@ -1,4 +1,4 @@
-package com.my.exercises;
+package com.my.exercises.mysorting;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,14 +7,14 @@ public class UserSortingComparable {
 
     public static void main(String[] args) {
 
-        //User[] users = getUsers();
-        //User[] sort = bubbleSort(users);
-        //User[] sort = mergeSort(users);
-        //User[] sort = insertionSort(users);
-
-        //for (User user : sort) {
-       // System.out.println(user.getName() + " " + user.getAge());
-        //}
+//        User[] users = getUsers();
+//        User[] sort = bubbleSort(users);
+//        User[] sort = mergeSort(users);
+//        User[] sort = insertionSort(users);
+//
+//        for (User user : sort) {
+//        System.out.println(user.getName() + " " + user.getAge());
+//        }
         User user1 = new User("Tom",22);
         User user2 = new User("Alice",30);
         User user3 = new User("Kate",26);
@@ -36,7 +36,7 @@ public class UserSortingComparable {
 
     }
 //    public int compareTo(User p){
-////        return name.length()-p.getName().length();
+//        return name.length()-p.getName().length();
 //    }
 
 

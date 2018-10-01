@@ -1,4 +1,4 @@
-package com.my.exercises.sortedset;
+package com.my.exercises.mysorting.sortingset;
 
 import java.util.Comparator;
 import java.util.SortedSet;
@@ -24,9 +24,6 @@ public class UserSortingSortedSet {
         System.out.println("Размер treeSet = " + users.size());
         System.out.println("First element : " + users.first());
         System.out.println("Last element : " + users.last());
-        //System.out.println(users.first());
-        //   SortedSet <User> set = users.subSet(user1,user5);
-        // System.out.println(set);
     }
 }
 
