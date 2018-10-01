@@ -24,6 +24,7 @@ class Counter {
 
 class MyThreads extends Thread {
     private Counter counter;
+
     public MyThreads(Counter counter) {
         this.counter = counter;
     }

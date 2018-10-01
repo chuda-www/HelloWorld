@@ -3,7 +3,7 @@ package com.my.exercises.mysorting.treemap;
 import java.util.Objects;
 import java.util.TreeMap;
 
-public class User implements Comparable<User>{
+public class User implements Comparable <User> {
     private String name;
     private int age;
 
@@ -23,17 +23,17 @@ public class User implements Comparable<User>{
         this.age = age;
     }
 
-    public User(int age,String name){
+    public User(int age, String name) {
         this.name = name;
         this.age = age;
-            }
+    }
 
     @Override
     public String toString() {
-        return name + " "+ age;
+        return name + " " + age;
     }
 
-    public int compareTo(User anotherUser){
+    public int compareTo(User anotherUser) {
         if (this.age == anotherUser.age) {
             return 0;
         } else if (this.age < anotherUser.age) {

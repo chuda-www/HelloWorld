@@ -1,5 +1,7 @@
 package com.my.exercises.mysorting;
+
 import com.my.exercises.mysorting.sortingset.User;
+
 import java.util.Arrays;
 
 public class UserSorting {
@@ -7,7 +9,7 @@ public class UserSorting {
     public static void main(String[] args) {
 
         User[] users = getUsers();
-      User[] sort = bubbleSort(users);
+        User[] sort = bubbleSort(users);
 //        User[] sort = mergeSort(users);
 //        User[] sort = insertionSort(users);
 
@@ -31,6 +33,7 @@ public class UserSorting {
         }
         return userArray;
     }
+
     public static User[] mergeSort(User[] userArray) {
         if (userArray.length < 2)
             return userArray;
@@ -60,15 +63,16 @@ public class UserSorting {
         }
         return sortedArray;
     }
+
     public static User[] insertionSort(User[] userArray) {
         User element;
         for (int i = 0; i < userArray.length; i++) {
             element = userArray[i];
 
-            while (i> 0 && userArray[i- 1].getAge() > element.getAge()) {
+            while (i > 0 && userArray[i - 1].getAge() > element.getAge()) {
                 userArray[i] = userArray[i - 1];
                 i--;
-               userArray[i]= element;
+                userArray[i] = element;
             }
         }
         return userArray;
@@ -76,11 +80,11 @@ public class UserSorting {
 
     public static User[] getUsers() {
 
-        User user1 = new User("Viktoryia",35);
-        User user2 = new User("Viktor",30);
-        User user3 = new User("Denis",37);
-        User user4 = new User("Dmitry",32);
-        User user5 = new User("Olga",36);
+        User user1 = new User("Viktoryia", 35);
+        User user2 = new User("Viktor", 30);
+        User user3 = new User("Denis", 37);
+        User user4 = new User("Dmitry", 32);
+        User user5 = new User("Olga", 36);
 
 //        user1.setName("Viktoryia");
 //        user1.setAge(35);

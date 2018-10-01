@@ -31,6 +31,7 @@ class CounterMain {
 
 class ThreadFirst extends Thread {
     CounterMain counter;
+
     public ThreadFirst(CounterMain counter) {
         this.counter = counter;
     }
@@ -56,6 +57,7 @@ class ThreadFirst extends Thread {
 
 class ThreadSecond extends Thread {
     CounterMain counter;
+
     public ThreadSecond(CounterMain counter) {
         this.counter = counter;
     }
@@ -81,6 +83,7 @@ class ThreadSecond extends Thread {
 
 class ThreadThird extends Thread {
     private CounterMain counter;
+
     public ThreadThird(CounterMain counter) {
         this.counter = counter;
     }
