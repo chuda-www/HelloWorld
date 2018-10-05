@@ -2,6 +2,6 @@
 <html>
 <body>
 <h2>Hello</h2>
-<h1>How {$name} are you?</h1>
+<h1>How are you?</h1>
 </body>
 </html>
