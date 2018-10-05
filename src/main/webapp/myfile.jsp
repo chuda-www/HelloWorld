@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <body>
-<h2>Hello</h2>
-<h1>How are you?</h1>
+<h2>Hello from my servlet!!!</h2>
+<div>My name is ${name} </div>
 </body>
 </html>
