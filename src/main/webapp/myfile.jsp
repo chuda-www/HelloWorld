@@ -2,6 +2,6 @@
 <html>
 <body>
 <h2>Hello from my servlet!!!</h2>
-<div>My name is ${name} </div>
+<div>My name is ${username} </div>
 </body>
 </html>
