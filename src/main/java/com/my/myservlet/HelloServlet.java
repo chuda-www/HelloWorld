@@ -14,7 +14,7 @@ public class HelloServlet extends HttpServlet {
         String title = req.getHeader("X-Name");
 
         req.setAttribute("name", title);
-        req.getRequestDispatcher("myfilepost.jsp").forward(req, resp);
+        req.getRequestDispatcher("myfile.jsp").forward(req, resp);
 
     }
 
@@ -27,7 +27,8 @@ public class HelloServlet extends HttpServlet {
         req.setAttribute("password", password);
 
         PrintWriter out = resp.getWriter();
-        req.getRequestDispatcher("myfilepost.jsp").forward(req, resp);
+        req.getRequestDispatcher("user.jsp").forward(req, resp);
+        // out.println("<html><body><p>" + req.getParameter("username") + "</p></body></html>");
 
     }
 }
