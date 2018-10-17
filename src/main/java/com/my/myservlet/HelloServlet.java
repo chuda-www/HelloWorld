@@ -17,4 +17,18 @@ public class HelloServlet extends HttpServlet {
         req.getRequestDispatcher("myfile.jsp").forward(req, resp);
 
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        req.setAttribute("username", username);
+        req.setAttribute("password", password);
+
+        PrintWriter out = resp.getWriter();
+        req.getRequestDispatcher("user.jsp").forward(req, resp);
+        // out.println("<html><body><p>" + req.getParameter("username") + "</p></body></html>");
+
+    }
 }
