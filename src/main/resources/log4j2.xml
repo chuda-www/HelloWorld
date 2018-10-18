@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="warn" name="my-webapp" packages="com.my.myservlet.HelloServlet">
     <Appenders>
-        <File name="MyFile" fileName="/home/viktoryia/logs/myproject.log">
+        <File name="LOGFILE" fileName="/tmp/myapp.log">
             <PatternLayout>
                 <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
             </PatternLayout>
@@ -9,7 +9,7 @@
     </Appenders>
     <Loggers>
         <Root level="debug">
-            <AppenderRef ref="MyFile"/>
+            <AppenderRef ref="LOGFILE"/>
         </Root>
     </Loggers>
 </Configuration>
