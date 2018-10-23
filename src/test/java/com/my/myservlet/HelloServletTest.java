@@ -75,13 +75,10 @@ public class HelloServletTest extends Mockito {
         when(req.getParameter("password")).thenReturn("myPassword");
         when(req.getRequestDispatcher("user.jsp")).thenReturn(dispatcher);
 
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        req.setAttribute("username", username);
-        req.setAttribute("password", password);
+        helloServlet.doPost(req, resp);
 
-        verify(req, times(1)).setAttribute(eq("username"), argument.capture());
-        verify(req, times(1)).setAttribute(eq("password"), argument.capture());
+        verify(req, times(1)).setAttribute(eq("username"),argument.capture());
+        verify(req, times(1)).setAttribute(eq("password"),argument.capture());
 
         List expected = asList("myName", "myPassword");
         assertEquals(expected, argument.getAllValues());
