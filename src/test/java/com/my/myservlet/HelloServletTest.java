@@ -1,5 +1,6 @@
 package com.my.myservlet;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class HelloServletTest extends Mockito {
 
@@ -68,13 +70,21 @@ public class HelloServletTest extends Mockito {
         final HttpServletResponse resp = mock(HttpServletResponse.class);
         final RequestDispatcher dispatcher = mock(RequestDispatcher.class);
 
-        req.setAttribute("username", req.getParameter("username"));
-        req.setAttribute("password", req.getParameter("password"));
+
+        when(req.getParameter("username")).thenReturn("myName");
+        when(req.getParameter("password")).thenReturn("myPassword");
         when(req.getRequestDispatcher("user.jsp")).thenReturn(dispatcher);
 
-        helloServlet.doPost(req, resp);
-        verify(req, times(2)).setAttribute("username", req.getParameter("username"));
-        verify(req, times(2)).setAttribute("password", req.getParameter("password"));
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        req.setAttribute("username", username);
+        req.setAttribute("password", password);
+
+        verify(req, atLeast(1)).setAttribute(eq("username"), argument.capture());
+        verify(req, atLeast(1)).setAttribute(eq("password"), argument.capture());
+
+        List expected = asList("myName", "myPassword");
+        assertEquals(expected, argument.getAllValues());
 
     }
 
