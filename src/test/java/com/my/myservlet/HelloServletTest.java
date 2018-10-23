@@ -38,7 +38,7 @@ public class HelloServletTest extends Mockito {
         verify(req, times(1)).getParameter("password");
         verify(req, times(1)).getRequestDispatcher("user.jsp");
         verify(dispatcher).forward(req, resp);
-//        verifyNoMoreInteractions(req, resp, dispatcher);
+ //       verifyNoMoreInteractions(req, resp, dispatcher);
 
     }
 
@@ -65,7 +65,7 @@ public class HelloServletTest extends Mockito {
     }
 
     @Test
-    public void doSetRequestTest() throws ServletException, IOException {
+    public void setAttributeTest() throws ServletException, IOException {
         final HttpServletRequest req = mock(HttpServletRequest.class);
         final HttpServletResponse resp = mock(HttpServletResponse.class);
         final RequestDispatcher dispatcher = mock(RequestDispatcher.class);
@@ -80,8 +80,8 @@ public class HelloServletTest extends Mockito {
         req.setAttribute("username", username);
         req.setAttribute("password", password);
 
-        verify(req, atLeast(1)).setAttribute(eq("username"), argument.capture());
-        verify(req, atLeast(1)).setAttribute(eq("password"), argument.capture());
+        verify(req, times(1)).setAttribute(eq("username"), argument.capture());
+        verify(req, times(1)).setAttribute(eq("password"), argument.capture());
 
         List expected = asList("myName", "myPassword");
         assertEquals(expected, argument.getAllValues());
