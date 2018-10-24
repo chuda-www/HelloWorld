@@ -1,9 +1,8 @@
 package com.my.myservlet;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
-import org.mockito.Mockito;
+import org.mockito.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,9 +19,14 @@ public class HelloServletTest extends Mockito {
 
     private HelloServlet helloServlet = new HelloServlet();
 
-    final HttpServletRequest req = mock(HttpServletRequest.class);
-    final HttpServletResponse resp = mock(HttpServletResponse.class);
-    final RequestDispatcher dispatcher = mock(RequestDispatcher.class);
+    @Mock private HttpServletRequest req;
+    @Mock private HttpServletResponse resp;
+    @Mock private RequestDispatcher dispatcher;
+
+    @Before
+    public void  init() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Captor
     ArgumentCaptor <String> argPostGetParameter = ArgumentCaptor.forClass(String.class);
