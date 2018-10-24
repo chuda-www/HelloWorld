@@ -28,12 +28,11 @@ public class HelloServletTest extends Mockito {
         MockitoAnnotations.initMocks(this);
     }
 
-    @Captor
-    ArgumentCaptor <String> argPostGetParameter = ArgumentCaptor.forClass(String.class);
-    ArgumentCaptor <String> argPostSetAttribute = ArgumentCaptor.forClass(String.class);
-    ArgumentCaptor <String> argPostDispatcher = ArgumentCaptor.forClass(String.class);
-    ArgumentCaptor <String> argGetDispatcher = ArgumentCaptor.forClass(String.class);
-    ArgumentCaptor <String> argGetSetAttribute = ArgumentCaptor.forClass(String.class);
+    @Captor ArgumentCaptor <String> argPostGetParameter;
+    @Captor ArgumentCaptor <String> argPostSetAttribute;
+    @Captor ArgumentCaptor <String> argPostDispatcher;
+    @Captor ArgumentCaptor <String> argGetDispatcher;
+    @Captor ArgumentCaptor <String> argGetSetAttribute;
 
 
     @Test
