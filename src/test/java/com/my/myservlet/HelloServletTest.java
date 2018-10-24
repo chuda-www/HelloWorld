@@ -48,7 +48,6 @@ public class HelloServletTest extends Mockito {
         verify(req).setCharacterEncoding("UTF-8");
         verify(req, times(1)).getParameter("username");
         verify(req, times(1)).getParameter("password");
-        verify(req, times(1)).getRequestDispatcher("user.jsp");
         verify(req, times(1)).getRequestDispatcher(argPostDispatcher.capture());
         verify(dispatcher).forward(req, resp);
         verify(req, times(2)).getParameter(argPostGetParameter.capture());
@@ -74,7 +73,6 @@ public class HelloServletTest extends Mockito {
 
         verify(req, times(1)).getHeader("X-Name");
         verify(req, times(1)).setAttribute(eq("name"), argGetSetAttribute.capture());
-        verify(req, times(1)).getRequestDispatcher("myfile.jsp");
         verify(req, times(1)).getRequestDispatcher(argGetDispatcher.capture());
         verify(dispatcher).forward(req, resp);
         verifyNoMoreInteractions(req, resp, dispatcher);
