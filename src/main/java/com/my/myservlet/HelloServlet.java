@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,9 +30,7 @@ public class HelloServlet extends HttpServlet {
         req.setAttribute("username", username);
         req.setAttribute("password", password);
 
-        PrintWriter out = resp.getWriter();
         req.getRequestDispatcher("user.jsp").forward(req, resp);
-        // out.println("<html><body><p>" + req.getParameter("username") + "</p></body></html>");
 
     }
 

@@ -1,10 +1,10 @@
 package com.my.myservlet;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mockito;
+import org.mockito.exceptions.verification.NoInteractionsWanted;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,60 +16,21 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class HelloServletTest extends Mockito {
 
     private HelloServlet helloServlet = new HelloServlet();
 
-    @Test
-    public void testServlet() throws ServletException, IOException {
-        final HttpServletRequest req = mock(HttpServletRequest.class);
-        final HttpServletResponse resp = mock(HttpServletResponse.class);
-        final RequestDispatcher dispatcher = mock(RequestDispatcher.class);
-
-        when(req.getParameter("username")).thenReturn("test_username");
-        when(req.getParameter("password")).thenReturn("test_password");
-        when(req.getRequestDispatcher("user.jsp")).thenReturn(dispatcher);
-
-        helloServlet.doPost(req, resp);
-
-        verify(req, times(1)).getParameter("username");
-        verify(req, times(1)).getParameter("password");
-        verify(req, times(1)).getRequestDispatcher("user.jsp");
-        verify(dispatcher).forward(req, resp);
- //       verifyNoMoreInteractions(req, resp, dispatcher);
-
-    }
+    final HttpServletRequest req = mock(HttpServletRequest.class);
+    final HttpServletResponse resp = mock(HttpServletResponse.class);
+    final RequestDispatcher dispatcher = mock(RequestDispatcher.class);
 
     @Captor
-    ArgumentCaptor <String> argument = ArgumentCaptor.forClass(String.class);
+    ArgumentCaptor <String> argumentGetParameter = ArgumentCaptor.forClass(String.class);
+    ArgumentCaptor <String> argumentSetAttribute = ArgumentCaptor.forClass(String.class);
 
     @Test
-    public void doSomeChecksWithCaptor() throws ServletException, IOException {
-        final HttpServletRequest req = mock(HttpServletRequest.class);
-        final HttpServletResponse resp = mock(HttpServletResponse.class);
-        final RequestDispatcher dispatcher = mock(RequestDispatcher.class);
-
-        when(req.getParameter(anyString())).thenReturn("myName");
-        when(req.getParameter(anyString())).thenReturn("myPassword");
-        when(req.getRequestDispatcher("user.jsp")).thenReturn(dispatcher);
-
-
-        helloServlet.doPost(req, resp);
-        verify(req, times(2)).getParameter(argument.capture());
-
-        List expected = asList("username", "password");
-        assertEquals(expected, argument.getAllValues());
-
-    }
-
-    @Test
-    public void setAttributeTest() throws ServletException, IOException {
-        final HttpServletRequest req = mock(HttpServletRequest.class);
-        final HttpServletResponse resp = mock(HttpServletResponse.class);
-        final RequestDispatcher dispatcher = mock(RequestDispatcher.class);
-
+    public void testServlet() throws ServletException, IOException {
 
         when(req.getParameter("username")).thenReturn("myName");
         when(req.getParameter("password")).thenReturn("myPassword");
@@ -77,11 +38,20 @@ public class HelloServletTest extends Mockito {
 
         helloServlet.doPost(req, resp);
 
-        verify(req, times(1)).setAttribute(eq("username"),argument.capture());
-        verify(req, times(1)).setAttribute(eq("password"),argument.capture());
+        verify(req).setCharacterEncoding("UTF-8");
+        verify(req, times(1)).getParameter("username");
+        verify(req, times(1)).getParameter("password");
+        verify(req, times(1)).getRequestDispatcher("user.jsp");
+        verify(dispatcher).forward(req, resp);
+        verify(req, times(2)).getParameter(argumentGetParameter.capture());
+        verify(req, times(1)).setAttribute(eq("username"), argumentSetAttribute.capture());
+        verify(req, times(1)).setAttribute(eq("password"), argumentSetAttribute.capture());
+        verifyNoMoreInteractions(req, resp, dispatcher);
 
-        List expected = asList("myName", "myPassword");
-        assertEquals(expected, argument.getAllValues());
+        List expectedGetParameter = asList("username", "password");
+        assertEquals(expectedGetParameter, argumentGetParameter.getAllValues());
+        List expectedSetAttribute = asList("myName", "myPassword");
+        assertEquals(expectedSetAttribute, argumentSetAttribute.getAllValues());
 
     }
 
