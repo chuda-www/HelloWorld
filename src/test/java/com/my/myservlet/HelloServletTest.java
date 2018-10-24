@@ -19,20 +19,28 @@ public class HelloServletTest extends Mockito {
 
     private HelloServlet helloServlet = new HelloServlet();
 
-    @Mock private HttpServletRequest req;
-    @Mock private HttpServletResponse resp;
-    @Mock private RequestDispatcher dispatcher;
+    @Mock
+    private HttpServletRequest req;
+    @Mock
+    private HttpServletResponse resp;
+    @Mock
+    private RequestDispatcher dispatcher;
+
+    @Captor
+    ArgumentCaptor <String> argPostGetParameter;
+    @Captor
+    ArgumentCaptor <String> argPostSetAttribute;
+    @Captor
+    ArgumentCaptor <String> argPostDispatcher;
+    @Captor
+    ArgumentCaptor <String> argGetDispatcher;
+    @Captor
+    ArgumentCaptor <String> argGetSetAttribute;
 
     @Before
-    public void  init() {
+    public void init() {
         MockitoAnnotations.initMocks(this);
     }
-
-    @Captor ArgumentCaptor <String> argPostGetParameter;
-    @Captor ArgumentCaptor <String> argPostSetAttribute;
-    @Captor ArgumentCaptor <String> argPostDispatcher;
-    @Captor ArgumentCaptor <String> argGetDispatcher;
-    @Captor ArgumentCaptor <String> argGetSetAttribute;
 
 
     @Test
