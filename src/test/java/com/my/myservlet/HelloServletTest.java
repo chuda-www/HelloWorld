@@ -53,7 +53,7 @@ public class HelloServletTest extends Mockito {
     public void testDoPost() throws ServletException, IOException {
 
         when(req.getParameter(anyString())).thenReturn("TEST");
-        when(req.getRequestDispatcher("user.jsp")).thenReturn(dispatcher);
+        when(req.getRequestDispatcher(anyString())).thenReturn(dispatcher);
         helloServlet.doPost(req, resp);
 
         verify(req).setCharacterEncoding("UTF-8");
@@ -67,35 +67,18 @@ public class HelloServletTest extends Mockito {
         assertEquals(expectedGetParameter, argPostGetParameter.getAllValues());
         assertEquals("TEST", argPostSetAttribute.getValue());
 
-//        when(req.getParameter("username")).thenReturn("myName");
-//        when(req.getParameter("password")).thenReturn("myPassword");
-//        when(req.getRequestDispatcher("user.jsp")).thenReturn(dispatcher);
-//        helloServlet.doPost(req, resp);
-//        verify(req).setCharacterEncoding("UTF-8");
-//        verify(req, times(1)).getParameter("username");
-//        verify(req, times(1)).getParameter("password");
-//        verify(req, times(1)).getRequestDispatcher(argPostDispatcher.capture());
-//        verify(req, times(2)).getParameter(argPostGetParameter.capture());
-//        verify(req, times(1)).setAttribute(eq("username"), argPostSetAttribute.capture());
-//        verify(req, times(1)).setAttribute(eq("password"), argPostSetAttribute.capture());
-//        assertEquals("user.jsp", argPostDispatcher.getValue());
-//        List expectedGetParameter = asList("username", "password");
-//        assertEquals(expectedGetParameter, argPostGetParameter.getAllValues());
-//        List expectedSetAttribute = asList("myName", "myPassword");
-//        assertEquals(expectedSetAttribute, argPostSetAttribute.getAllValues());
-
     }
 
     @Test
     public void testDoGet() throws ServletException, IOException {
 
         when(req.getHeader(anyString())).thenReturn("testName");
-        when(req.getRequestDispatcher("myfile.jsp")).thenReturn(dispatcher);
+        when(req.getRequestDispatcher(anyString())).thenReturn(dispatcher);
 
         helloServlet.doGet(req, resp);
 
-        verify(req, times(1)).getHeader("X-Name");
-        verify(req, times(1)).setAttribute(eq("name"), argGetSetAttribute.capture());
+        verify(req, times(1)).getHeader(anyString());
+        verify(req, times(1)).setAttribute(anyString(), argGetSetAttribute.capture());
         verify(req, times(1)).getRequestDispatcher(argGetDispatcher.capture());
 
         assertEquals("testName", argGetSetAttribute.getValue());
