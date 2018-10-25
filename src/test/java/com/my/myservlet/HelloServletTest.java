@@ -1,7 +1,6 @@
 package com.my.myservlet;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.*;
@@ -50,37 +49,47 @@ public class HelloServletTest extends Mockito {
         verifyNoMoreInteractions(req, resp, dispatcher);
     }
 
-
     @Test
     public void testDoPost() throws ServletException, IOException {
 
-        when(req.getParameter("username")).thenReturn("myName");
-        when(req.getParameter("password")).thenReturn("myPassword");
+        when(req.getParameter(anyString())).thenReturn("TEST");
         when(req.getRequestDispatcher("user.jsp")).thenReturn(dispatcher);
-
         helloServlet.doPost(req, resp);
 
         verify(req).setCharacterEncoding("UTF-8");
-        verify(req, times(1)).getParameter("username");
-        verify(req, times(1)).getParameter("password");
         verify(req, times(1)).getRequestDispatcher(argPostDispatcher.capture());
-
+        verify(req, times(2)).getParameter(anyString());
         verify(req, times(2)).getParameter(argPostGetParameter.capture());
-        verify(req, times(1)).setAttribute(eq("username"), argPostSetAttribute.capture());
-        verify(req, times(1)).setAttribute(eq("password"), argPostSetAttribute.capture());
+        verify(req, times(2)).setAttribute(anyString(), argPostSetAttribute.capture());
 
         assertEquals("user.jsp", argPostDispatcher.getValue());
         List expectedGetParameter = asList("username", "password");
         assertEquals(expectedGetParameter, argPostGetParameter.getAllValues());
-        List expectedSetAttribute = asList("myName", "myPassword");
-        assertEquals(expectedSetAttribute, argPostSetAttribute.getAllValues());
+        assertEquals("TEST", argPostSetAttribute.getValue());
+
+//        when(req.getParameter("username")).thenReturn("myName");
+//        when(req.getParameter("password")).thenReturn("myPassword");
+//        when(req.getRequestDispatcher("user.jsp")).thenReturn(dispatcher);
+//        helloServlet.doPost(req, resp);
+//        verify(req).setCharacterEncoding("UTF-8");
+//        verify(req, times(1)).getParameter("username");
+//        verify(req, times(1)).getParameter("password");
+//        verify(req, times(1)).getRequestDispatcher(argPostDispatcher.capture());
+//        verify(req, times(2)).getParameter(argPostGetParameter.capture());
+//        verify(req, times(1)).setAttribute(eq("username"), argPostSetAttribute.capture());
+//        verify(req, times(1)).setAttribute(eq("password"), argPostSetAttribute.capture());
+//        assertEquals("user.jsp", argPostDispatcher.getValue());
+//        List expectedGetParameter = asList("username", "password");
+//        assertEquals(expectedGetParameter, argPostGetParameter.getAllValues());
+//        List expectedSetAttribute = asList("myName", "myPassword");
+//        assertEquals(expectedSetAttribute, argPostSetAttribute.getAllValues());
 
     }
 
     @Test
     public void testDoGet() throws ServletException, IOException {
 
-        when(req.getHeader("X-Name")).thenReturn("testName");
+        when(req.getHeader(anyString())).thenReturn("testName");
         when(req.getRequestDispatcher("myfile.jsp")).thenReturn(dispatcher);
 
         helloServlet.doGet(req, resp);
@@ -93,6 +102,5 @@ public class HelloServletTest extends Mockito {
         assertEquals("myfile.jsp", argGetDispatcher.getValue());
 
     }
-
 
 }
