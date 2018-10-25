@@ -1,5 +1,7 @@
 package com.my.myservlet;
 
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.*;
@@ -42,6 +44,12 @@ public class HelloServletTest extends Mockito {
         MockitoAnnotations.initMocks(this);
     }
 
+    @After
+    public void tearDown() throws Exception {
+        verify(dispatcher).forward(req, resp);
+        verifyNoMoreInteractions(req, resp, dispatcher);
+    }
+
 
     @Test
     public void testDoPost() throws ServletException, IOException {
@@ -56,11 +64,10 @@ public class HelloServletTest extends Mockito {
         verify(req, times(1)).getParameter("username");
         verify(req, times(1)).getParameter("password");
         verify(req, times(1)).getRequestDispatcher(argPostDispatcher.capture());
-        verify(dispatcher).forward(req, resp);
+
         verify(req, times(2)).getParameter(argPostGetParameter.capture());
         verify(req, times(1)).setAttribute(eq("username"), argPostSetAttribute.capture());
         verify(req, times(1)).setAttribute(eq("password"), argPostSetAttribute.capture());
-        verifyNoMoreInteractions(req, resp, dispatcher);
 
         assertEquals("user.jsp", argPostDispatcher.getValue());
         List expectedGetParameter = asList("username", "password");
@@ -81,12 +88,11 @@ public class HelloServletTest extends Mockito {
         verify(req, times(1)).getHeader("X-Name");
         verify(req, times(1)).setAttribute(eq("name"), argGetSetAttribute.capture());
         verify(req, times(1)).getRequestDispatcher(argGetDispatcher.capture());
-        verify(dispatcher).forward(req, resp);
-        verifyNoMoreInteractions(req, resp, dispatcher);
 
         assertEquals("testName", argGetSetAttribute.getValue());
         assertEquals("myfile.jsp", argGetDispatcher.getValue());
 
     }
+
 
 }
