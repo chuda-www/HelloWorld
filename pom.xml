@@ -10,19 +10,7 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-framework-bom</artifactId>
-            <version>RELEASE</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
             <version>RELEASE</version>
         </dependency>
         <dependency>
