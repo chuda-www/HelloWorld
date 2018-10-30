@@ -6,8 +6,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class MainApp {
+    final static Logger log = LogManager.getLogger(MainApp.class.getName());
+
     public static void main(String[] args) {
-        final Logger log = LogManager.getLogger(MainApp.class.getName());
 
         ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         HelloSpring obj = (HelloSpring) context.getBean("helloWorld");
