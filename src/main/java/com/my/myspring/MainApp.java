@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class MainApp {
-    final static Logger log = LogManager.getLogger(MainApp.class.getName());
+    final static Logger log = LogManager.getLogger(MainApp.class);
 
     public static void main(String[] args) {
 
