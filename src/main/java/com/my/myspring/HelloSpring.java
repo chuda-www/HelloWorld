@@ -1,6 +1,7 @@
 package com.my.myspring;
 
 public class HelloSpring {
+
     private String message;
 
     public void setMessage(String message) {
@@ -10,4 +11,5 @@ public class HelloSpring {
     public String getMessage() {
         return message;
     }
+
 }

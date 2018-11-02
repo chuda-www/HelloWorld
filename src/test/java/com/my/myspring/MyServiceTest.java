@@ -6,21 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration("/beans.xml")
-
-public class MainAppTest {
-
+public class MyServiceTest {
     @Autowired
-    private HelloSpring obj;
+    private MyService service;
 
     @Test
-    public void test() {
+    public void testMyService() {
 
-        assertEquals("Hello!!!", obj.getMessage());
+        assertEquals("testName", service.getNameX());
 
     }
-
 }
