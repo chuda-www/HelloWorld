@@ -18,14 +18,15 @@
     <bean id="employeeTemplate" class="com.my.myspringdatabase.EmployeeTemplateDAO">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <jdbc:initialize-database data-source="dataSource">
-        <jdbc:script location="classpath:src/main/resources/start.sql"/>
-    </jdbc:initialize-database>
+
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.h2.Driver"/>
-        <property name="url" value="jdbc:h2:mem:test"/>
+        <property name="url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
         <property name="username" value="${application.username}"/>
         <property name="password" value=""/>
     </bean>
 
+    <jdbc:initialize-database data-source="dataSource">
+        <jdbc:script location="classpath:/start.sql"/>
+    </jdbc:initialize-database>
 </beans>
