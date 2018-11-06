@@ -20,10 +20,10 @@
     </bean>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.h2.Driver"/>
-        <property name="url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
+        <property name="driverClassName" value="${application.driverClassName}"/>
+        <property name="url" value="${application.url}"/>
         <property name="username" value="${application.username}"/>
-        <property name="password" value=""/>
+        <property name="password" value="${application.password}"/>
     </bean>
 
     <jdbc:initialize-database data-source="dataSource">
