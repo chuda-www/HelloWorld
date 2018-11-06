@@ -6,9 +6,10 @@ import javax.sql.DataSource;
 import java.util.List;
 
 public class EmployeeTemplateDAO implements EmployeeDao {
+
     private JdbcTemplate jdbcTemplateObject;
 
-    public void setDataSource(DataSource dataSource) {
+    public EmployeeTemplateDAO(DataSource dataSource) {
         this.jdbcTemplateObject = new JdbcTemplate(dataSource);
     }
 
@@ -40,5 +41,12 @@ public class EmployeeTemplateDAO implements EmployeeDao {
         String SQL = "update Employee set age = ? where id = ?";
         jdbcTemplateObject.update(SQL, age, id);
         System.out.println("Updated Record with ID = " + id);
+    }
+
+    public void updateName(Integer id, String name) {
+        String SQL = "update Employee set name = ? where id = ?";
+        jdbcTemplateObject.update(SQL, name, id);
+        System.out.println("Updated Record with Name = " + name);
+
     }
 }

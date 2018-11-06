@@ -8,7 +8,7 @@ import java.util.List;
 public class MainAppEmployee {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("beansfordatabase.xml");
-        EmployeeTemplateDAO employeeTemplateDAO = (EmployeeTemplateDAO) context.getBean(EmployeeTemplateDAO.class);
+        EmployeeTemplateDAO employeeTemplateDAO = context.getBean(EmployeeTemplateDAO.class);
 
         System.out.println("------Records Creation--------");
         employeeTemplateDAO.create("Zara", 11);
@@ -26,6 +26,9 @@ public class MainAppEmployee {
 
         System.out.println("----Updating Record with ID = 2 -----");
         employeeTemplateDAO.update(2, 20);
+
+        System.out.println("----Updating Record with ID = 2 -----");
+        employeeTemplateDAO.updateName(2, "Olga");
 
         System.out.println("----Listing Record with ID = 2 -----");
         Employee employee = employeeTemplateDAO.getById(2);

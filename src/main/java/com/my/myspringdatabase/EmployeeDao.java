@@ -3,18 +3,18 @@ package com.my.myspringdatabase;
 import javax.sql.DataSource;
 import java.util.List;
 
-public interface EmployeeDao {
+interface EmployeeDao {
 
-    public void setDataSource(DataSource ds);
+    void create(String name, Integer age);
 
-    public void create(String name, Integer age);
+    Employee getById(Integer id);
 
-    public Employee getById(Integer id);
+    void update(Integer id, Integer age);
 
-    public void update(Integer id, Integer age);
+    void updateName(Integer id, String name);
 
-    public void deleteById(Integer id);
+    void deleteById(Integer id);
 
-    public List <Employee> listEmployee();
+    List <Employee> listEmployee();
 }
 
