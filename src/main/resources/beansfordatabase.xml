@@ -19,7 +19,6 @@
         <constructor-arg ref="dataSource"/>
     </bean>
 
-
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${application.driverClassName}"/>
         <property name="url" value="${application.url}"/>

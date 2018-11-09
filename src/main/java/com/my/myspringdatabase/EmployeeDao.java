@@ -9,9 +9,7 @@ interface EmployeeDao {
 
     Employee getById(Integer id);
 
-    void update(Integer id, Integer age);
-
-    void updateName(Integer id, String name);
+    void update(Integer id, Object object);
 
     void deleteById(Integer id);
 
