@@ -1,6 +1,5 @@
 package com.my.myspringdatabase;
 
-import javax.sql.DataSource;
 import java.util.List;
 
 interface EmployeeDAO {
@@ -9,7 +8,7 @@ interface EmployeeDAO {
 
     Employee getById(Integer id);
 
-    void update(Integer id,Object object);
+    void update(Integer id, Employee employee);
 
     void deleteById(Integer id);
 

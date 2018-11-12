@@ -7,7 +7,6 @@ import java.util.List;
 
 public class MainAppEmployee {
 
-
     private static Employee createEmployeeObject(String name, Integer age) {
         Employee employee = new Employee();
         employee.setName(name);
@@ -38,12 +37,14 @@ public class MainAppEmployee {
         }
 
         System.out.println("----Updating Record with ID = 2 -----");
-        employeeDAO.update(2, "jxlfgh");
-        System.out.println("Record with ID = 2 " + employeeDAO.getById(2));
+        Employee employeeUpdate = employeeDAO.getById(2);
+        //  employeeUpdate.setAge(100);
+        employeeUpdate.setName("Olga");
+        employeeDAO.update(2, employeeUpdate);
+        System.out.println("Record with ID = 2 " + employeeUpdate);
 
-        System.out.println("----Listing Record with ID = 2 -----");
-        employeeDAO.getById(2);
-        System.out.println("Record with ID = 2 = " + employeeDAO.getById(2));
+        System.out.println("Updated age: " + employeeUpdate.getAge());
+        System.out.println("Updated age: " + employeeUpdate.getName());
 
     }
 }

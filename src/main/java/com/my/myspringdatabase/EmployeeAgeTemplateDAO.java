@@ -7,8 +7,7 @@ import java.util.List;
 
 public class EmployeeAgeTemplateDAO implements EmployeeDAO {
 
-    private JdbcTemplate jdbcTemplate;
-    Employee employee = new Employee();
+    public JdbcTemplate jdbcTemplate;
 
     public EmployeeAgeTemplateDAO(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -37,12 +36,10 @@ public class EmployeeAgeTemplateDAO implements EmployeeDAO {
         jdbcTemplate.update(SQL, id);
         System.out.println("Deleted Record with ID = " + id);
     }
-@Override
-    public void update(Integer id,Object object) {
+
+    public void update(Integer id, Employee employee) {
         String SQL = "update Employee set age = ? where id = ?";
-        jdbcTemplate.update(SQL,id, employee.getAge());
+        jdbcTemplate.update(SQL, employee.getAge(), id);
         System.out.println("Updated Record with ID = " + employee.getId());
-
     }
-
 }
