@@ -12,9 +12,9 @@ public class EmployeeNameTemplateDAO extends EmployeeAgeTemplateDAO {
     }
 
     @Override
-    public void update(Integer id, Employee employee) {
+    public void update(Integer id, Object object) {
         String SQL = "update Employee set name = ? where id = ?";
-        jdbcTemplate.update(SQL, employee.getName(), id);
-        System.out.println("Updated Record with Name = " + employee.getName());
+        jdbcTemplate.update(SQL, object, id);
+        System.out.println("Updated Record with ID = " + id);
     }
 }

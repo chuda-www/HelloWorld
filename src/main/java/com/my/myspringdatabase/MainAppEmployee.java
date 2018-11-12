@@ -37,14 +37,8 @@ public class MainAppEmployee {
         }
 
         System.out.println("----Updating Record with ID = 2 -----");
-        Employee employeeUpdate = employeeDAO.getById(2);
-        //  employeeUpdate.setAge(100);
-        employeeUpdate.setName("Olga");
-        employeeDAO.update(2, employeeUpdate);
-        System.out.println("Record with ID = 2 " + employeeUpdate);
-
-        System.out.println("Updated age: " + employeeUpdate.getAge());
-        System.out.println("Updated age: " + employeeUpdate.getName());
-
+        employeeDAO.getById(2);
+        employeeDAO.update(2, 100);
+        System.out.println("Record with ID = 2 " + employeeDAO.getById(2));
     }
 }

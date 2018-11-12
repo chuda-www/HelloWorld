@@ -37,9 +37,10 @@ public class EmployeeAgeTemplateDAO implements EmployeeDAO {
         System.out.println("Deleted Record with ID = " + id);
     }
 
-    public void update(Integer id, Employee employee) {
-        String SQL = "update Employee set age = ? where id = ?";
-        jdbcTemplate.update(SQL, employee.getAge(), id);
-        System.out.println("Updated Record with ID = " + employee.getId());
+    public void update(Integer id, Object object) {
+
+        String SQL = "update Employee  set age = ? where id = ?";
+        jdbcTemplate.update(SQL, object, id);
+        System.out.println("Updated Record with ID = " + id);
     }
 }
