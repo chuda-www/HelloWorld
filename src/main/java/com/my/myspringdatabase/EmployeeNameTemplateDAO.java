@@ -6,14 +6,15 @@ import javax.sql.DataSource;
 
 public class EmployeeNameTemplateDAO extends EmployeeAgeTemplateDAO {
     private JdbcTemplate jdbcTemplate;
+    Employee employee = new Employee();
 
     public EmployeeNameTemplateDAO(DataSource dataSource) {
         super(dataSource);
     }
-
-    public void update(Employee employee) {
+@Override
+    public void update(Integer id, Object object) {
         String SQL = "update Employee where id = ? set name = ? ";
-        jdbcTemplate.update(SQL, employee.getId(),employee.getName());
+        jdbcTemplate.update(SQL, id, employee.getName());
         System.out.println("Updated Record with Name = " + employee.getName());
     }
 }

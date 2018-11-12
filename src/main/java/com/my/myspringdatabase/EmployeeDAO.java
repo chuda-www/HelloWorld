@@ -9,7 +9,7 @@ interface EmployeeDAO {
 
     Employee getById(Integer id);
 
-    void update(Employee employee);
+    void update(Integer id,Object object);
 
     void deleteById(Integer id);
 
