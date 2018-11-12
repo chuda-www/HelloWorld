@@ -15,11 +15,10 @@
         <property name="locations" value="classpath:application.properties"/>
     </bean>
 
-    <bean id="employeeTemplate" class="com.my.myspringdatabase.EmployeeTemplateDAO">
+    <bean id="employeeTemplate" class="com.my.myspringdatabase.EmployeeAgeTemplateDAO">
         <constructor-arg ref="dataSource"/>
     </bean>
-
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${application.driverClassName}"/>
         <property name="url" value="${application.url}"/>
         <property name="username" value="${application.username}"/>

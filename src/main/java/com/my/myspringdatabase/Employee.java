@@ -6,6 +6,12 @@ public class Employee {
     private Integer age;
     private Integer id;
 
+//    public Employee(Integer id, String name, Integer age) {
+//        this.name = name;
+//        this.age = age;
+//        this.id = id;
+//    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -28,5 +34,9 @@ public class Employee {
 
     public Integer getId() {
         return id;
+    }
+
+    public String toString() {
+        return id + " " + name + " " + age;
     }
 }

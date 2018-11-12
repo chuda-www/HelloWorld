@@ -3,17 +3,43 @@ package com.my.myspringdatabase;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.sql.SQLOutput;
 import java.util.List;
 
 public class MainAppEmployee {
+
+    private static Employee createEmployeeObject(String name, Integer age) {
+        Employee employee = new Employee();
+        employee.setName(name);
+        employee.setAge(age);
+        return employee;
+    }
+
+    private static Employee updateEmployeeObjectAge(Integer id, Integer age) {
+        Employee employee = new Employee();
+        employee.setId(id);
+        employee.setAge(age);
+        return employee;
+    }
+
+    private static Employee updateEmployeeObjectName(Integer id, String name) {
+        Employee employee = new Employee();
+        employee.setId(id);
+        employee.setName(name);
+        return employee;
+    }
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("beansfordatabase.xml");
-        EmployeeDao employeeDAO = context.getBean(EmployeeDao.class);
+        EmployeeDAO employeeDAO = context.getBean(EmployeeDAO.class);
+
+        Employee employee1 = createEmployeeObject("Zara", 11);
+        Employee employee2 = createEmployeeObject("Nuha", 2);
+        Employee employee3 = createEmployeeObject("Ayan", 15);
 
         System.out.println("------Records Creation--------");
-        employeeDAO.create("Zara", 11);
-        employeeDAO.create("Nuha", 2);
-        employeeDAO.create("Ayan", 15);
+        employeeDAO.create(employee1);
+        employeeDAO.create(employee2);
+        employeeDAO.create(employee3);
 
         System.out.println("------Listing Multiple Records--------");
         List <Employee> employeeList = employeeDAO.listEmployee();
@@ -25,16 +51,19 @@ public class MainAppEmployee {
         }
 
         System.out.println("----Updating Record with ID = 2 -----");
-        employeeDAO.update(2, 20);
 
-        System.out.println("----Updating Record with ID = 2 -----");
-        employeeDAO.update(2, "Olga");
+        employeeDAO.update(updateEmployeeObjectAge(2, 33));
+        System.out.println("Record with ID = 2 " + employeeDAO.getById(2));
+
+//        System.out.println("----Updating Record with Name Olga");
+//        employeeDAO.update(updateEmployeeObjectName(2, "Olga"));
+//        System.out.println("Record with ID = 2 " + employeeDAO.getById(2));
 
         System.out.println("----Listing Record with ID = 2 -----");
-        Employee employee = employeeDAO.getById(2);
-        System.out.print("ID : " + employee.getId());
-        System.out.print(", Name : " + employee.getName());
-        System.out.println(", Age : " + employee.getAge());
+        employeeDAO.getById(2);
+        System.out.print("ID : " + employee1.getId());
+        System.out.print(", Name : " + employee1.getName());
+        System.out.println(", Age : " + employee1.getAge());
 
     }
 }
