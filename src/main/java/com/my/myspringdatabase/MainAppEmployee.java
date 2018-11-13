@@ -32,13 +32,12 @@ public class MainAppEmployee {
 
         for (Employee record : employeeList) {
             System.out.print("ID : " + record.getId());
-            System.out.print(", Name : " + record.getName());
-            System.out.println(", Age : " + record.getAge());
+            System.out.print(" Name : " + record.getName());
+            System.out.println(" Age : " + record.getAge());
         }
 
         System.out.println("----Updating Record with ID = 2 -----");
-        employeeDAO.getById(2);
-        employeeDAO.update(2, 100);
-        System.out.println("Record with ID = 2 " + employeeDAO.getById(2));
+        employeeDAO.update(2, 222);
+        System.out.println("Record with ID = 2 \n" + employeeDAO.getById(2));
     }
 }

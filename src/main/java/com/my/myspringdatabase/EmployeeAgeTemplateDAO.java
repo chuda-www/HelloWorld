@@ -1,5 +1,7 @@
 package com.my.myspringdatabase;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -8,6 +10,7 @@ import java.util.List;
 public class EmployeeAgeTemplateDAO implements EmployeeDAO {
 
     public JdbcTemplate jdbcTemplate;
+    final static Logger log = LogManager.getLogger(EmployeeAgeTemplateDAO.class);
 
     public EmployeeAgeTemplateDAO(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -16,7 +19,7 @@ public class EmployeeAgeTemplateDAO implements EmployeeDAO {
     public void create(Employee employee) {
         String SQL = "INSERT INTO Employee (name, age) VALUES (?, ?)";
         jdbcTemplate.update(SQL, employee.getName(), employee.getAge());
-        System.out.println("Created Record Name = " + employee.getName() + " Age = " + employee.getAge());
+        log.debug("Created Record Name = " + employee.getName() + " Age = " + employee.getAge());
     }
 
     public Employee getById(Integer id) {
@@ -34,13 +37,12 @@ public class EmployeeAgeTemplateDAO implements EmployeeDAO {
     public void deleteById(Integer id) {
         String SQL = "delete from Employee where id = ?";
         jdbcTemplate.update(SQL, id);
-        System.out.println("Deleted Record with ID = " + id);
+        log.debug("Deleted Record with ID = " + id);
     }
 
     public void update(Integer id, Object object) {
-
         String SQL = "update Employee  set age = ? where id = ?";
         jdbcTemplate.update(SQL, object, id);
-        System.out.println("Updated Record with ID = " + id);
+        log.debug("Updated Record with ID = " + id);
     }
 }

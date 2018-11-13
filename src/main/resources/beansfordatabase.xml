@@ -15,7 +15,7 @@
         <property name="locations" value="classpath:application.properties"/>
     </bean>
 
-    <bean id="employeeTemplate" class="com.my.myspringdatabase.EmployeeNameTemplateDAO">
+    <bean id="employeeTemplate" class="com.my.myspringdatabase.EmployeeAgeTemplateDAO">
         <constructor-arg ref="dataSource"/>
     </bean>
         <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
