@@ -9,8 +9,8 @@ import java.util.List;
 
 public class EmployeeAgeTemplateDAO implements EmployeeDAO {
 
-    public JdbcTemplate jdbcTemplate;
-    final static Logger log = LogManager.getLogger(EmployeeAgeTemplateDAO.class);
+    protected JdbcTemplate jdbcTemplate;
+    final private static Logger log = LogManager.getLogger(EmployeeAgeTemplateDAO.class);
 
     public EmployeeAgeTemplateDAO(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -19,7 +19,7 @@ public class EmployeeAgeTemplateDAO implements EmployeeDAO {
     public void create(Employee employee) {
         String SQL = "INSERT INTO Employee (name, age) VALUES (?, ?)";
         jdbcTemplate.update(SQL, employee.getName(), employee.getAge());
-        log.debug("Created Record Name = " + employee.getName() + " Age = " + employee.getAge());
+        log.debug("Created Record Name = " + employee.toString());
     }
 
     public Employee getById(Integer id) {
