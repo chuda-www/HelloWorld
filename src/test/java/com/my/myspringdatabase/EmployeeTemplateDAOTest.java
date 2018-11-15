@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.jdbc.JdbcTestUtils;
@@ -32,7 +31,7 @@ public class EmployeeTemplateDAOTest {
         //create
         Employee employee1 = createEmployeeObject("Zara", 11);
         employeeDAO.create(employee1);
-        System.out.println("All loaded: " + employee1);
+        System.out.println("Create record: " + employee1);
 
         // getById
         Employee resultGetById = employeeDAO.getById(1);
@@ -43,20 +42,20 @@ public class EmployeeTemplateDAOTest {
         Assert.assertTrue(c == 1);
 
         //update
-        employeeDAO.update(1, "Jane");
+        int emp = employeeDAO.update(1, "Jane");
         int n = JdbcTestUtils.countRowsInTableWhere(employeeDAO.jdbcTemplate, "Employee", "name = 'Jane' ");
-        Assert.assertTrue(true);
         Assert.assertTrue(n == 1);
+        Assert.assertTrue(emp == 1);
 
         //listEmployee
         List <Employee> list = employeeDAO.listEmployee();
-        System.out.println("All loaded: " + list);
+        System.out.println("All loaded list: " + list);
         Assert.assertTrue(list.size() == 1);
 
         //deleteById
         employeeDAO.deleteById(1);
         Assert.assertTrue(true);
-        System.out.println("List: " + employee1);
+        System.out.println("List: " + employeeDAO.listEmployee());
 
         c = JdbcTestUtils.countRowsInTable(employeeDAO.jdbcTemplate, "Employee");
         Assert.assertTrue(c == 0);
