@@ -17,7 +17,12 @@ public class EmployeeNameTemplateDAO extends EmployeeAgeTemplateDAO {
     public int update(Integer id, Object object) {
         String SQL = "update Employee set name = ? where id = ?";
         int emp = jdbcTemplate.update(SQL, object, id);
-        log.debug("Updated Record with ID = " + id + "\n");
+        if (emp > 0) {
+            log.debug("Updated Record with ID = " + id + " Value = " + object +
+                    " number of changes = " + emp);
+        } else {
+            log.debug("Record not updated");
+        }
         return emp;
     }
 }
