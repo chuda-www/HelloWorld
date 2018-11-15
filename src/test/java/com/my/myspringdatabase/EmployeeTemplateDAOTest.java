@@ -16,8 +16,6 @@ import java.util.List;
 
 public class EmployeeTemplateDAOTest {
 
-    private JdbcTemplate jdbcTemplate;
-
     @Autowired
     private EmployeeAgeTemplateDAO employeeDAO;
 
@@ -46,7 +44,9 @@ public class EmployeeTemplateDAOTest {
 
         //update
         employeeDAO.update(1, "Jane");
+        int n = JdbcTestUtils.countRowsInTableWhere(employeeDAO.jdbcTemplate, "Employee", "name = 'Jane' ");
         Assert.assertTrue(true);
+        Assert.assertTrue(n == 1);
 
         //listEmployee
         List <Employee> list = employeeDAO.listEmployee();
@@ -56,7 +56,7 @@ public class EmployeeTemplateDAOTest {
         //deleteById
         employeeDAO.deleteById(1);
         Assert.assertTrue(true);
-       System.out.println("List: " + employee1);
+        System.out.println("List: " + employee1);
 
         c = JdbcTestUtils.countRowsInTable(employeeDAO.jdbcTemplate, "Employee");
         Assert.assertTrue(c == 0);
