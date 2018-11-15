@@ -36,7 +36,7 @@ public class EmployeeTemplateDAOTest {
         // getById
         Employee resultGetById = employeeDAO.getById(1);
         Assert.assertNotNull(resultGetById);
-        Assert.assertTrue("Zara".equals(resultGetById.getName()));
+        Assert.assertEquals("Zara", employee1.getName());
 
         int c = JdbcTestUtils.countRowsInTable(employeeDAO.jdbcTemplate, "Employee");
         Assert.assertTrue(c == 1);
@@ -54,9 +54,7 @@ public class EmployeeTemplateDAOTest {
 
         //deleteById
         employeeDAO.deleteById(1);
-        Assert.assertTrue(true);
         System.out.println("List: " + employeeDAO.listEmployee());
-
         c = JdbcTestUtils.countRowsInTable(employeeDAO.jdbcTemplate, "Employee");
         Assert.assertTrue(c == 0);
     }
