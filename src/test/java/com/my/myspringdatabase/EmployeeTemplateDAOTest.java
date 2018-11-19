@@ -8,6 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.jdbc.JdbcTestUtils;
 
+import java.sql.SQLOutput;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -57,6 +58,21 @@ public class EmployeeTemplateDAOTest {
         System.out.println("List: " + employeeDAO.listEmployee());
         c = JdbcTestUtils.countRowsInTable(employeeDAO.jdbcTemplate, "Employee");
         Assert.assertTrue(c == 0);
+    }
+
+    @Test
+    public void createTestExeption() {
+
+        try {
+            Employee employee1 = createEmployeeObject("Zara", 11);
+            Employee employee2 = createEmployeeObject("Zara", 22);
+            employeeDAO.create(employee1);
+            employeeDAO.create(employee2);
+            Assert.fail("BAD INPUT");
+        }
+        catch (Exception e) {
+            System.out.println("creation error");
+        }
     }
 }
 
