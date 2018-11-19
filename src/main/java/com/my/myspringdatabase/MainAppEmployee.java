@@ -38,6 +38,7 @@ public class MainAppEmployee {
 
         System.out.println("----Updating Record with ID = 2 -----");
         employeeDAO.update(2, 222);
+        employeeDAO.update(5, 306);
         System.out.println("Record with ID = 2 \n" + employeeDAO.getById(2));
     }
 }

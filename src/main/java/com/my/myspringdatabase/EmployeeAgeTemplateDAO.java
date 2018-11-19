@@ -40,9 +40,14 @@ public class EmployeeAgeTemplateDAO implements EmployeeDAO {
         log.debug("Deleted Record with ID = " + id);
     }
 
-    public void update(Integer id, Object object) {
+    public int update(Integer id, Object object) {
         String SQL = "update Employee  set age = ? where id = ?";
-        jdbcTemplate.update(SQL, object, id);
-        log.debug("Updated Record with ID = " + id);
+        int emp = jdbcTemplate.update(SQL, object, id);
+        if (emp > 0) {
+            log.debug("Updated Record with ID = " + id + " Value = " + object);
+        } else {
+            log.debug("Record not updated");
+        }
+        return emp;
     }
 }
