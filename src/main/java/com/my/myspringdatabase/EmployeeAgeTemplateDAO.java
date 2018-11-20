@@ -26,10 +26,10 @@ public class EmployeeAgeTemplateDAO implements EmployeeDAO {
                 connection -> {
                     PreparedStatement ps = connection.prepareStatement(SQL, new String[]{"ID"});
                     ps.setString(1, employee.getName());
-                    ps.setInt(2,employee.getAge());
+                    ps.setInt(2, employee.getAge());
                     return ps;
                 }, keyHolder);
-                Number key = keyHolder.getKey();
+        Number key = keyHolder.getKey();
         log.debug("Created Record Name = " + employee.toString());
         return key.intValue();
     }
