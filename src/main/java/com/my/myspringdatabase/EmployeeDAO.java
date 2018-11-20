@@ -4,7 +4,7 @@ import java.util.List;
 
 interface EmployeeDAO {
 
-    void create(Employee employee);
+    Integer create(Employee employee);
 
     Employee getById(Integer id);
 

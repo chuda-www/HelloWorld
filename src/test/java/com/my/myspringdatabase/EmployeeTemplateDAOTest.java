@@ -8,7 +8,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.jdbc.JdbcTestUtils;
 
-import java.sql.SQLOutput;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,23 +26,41 @@ public class EmployeeTemplateDAOTest {
     }
 
     @Test
+    public void createTestExeption() {
+
+        JdbcTestUtils.deleteFromTables(employeeDAO.jdbcTemplate, "Employee");
+
+        try {
+            Employee employee3 = createEmployeeObject("Anna", 11);
+            Employee employee4 = createEmployeeObject("Anna", 22);
+            employeeDAO.create(employee3);
+            employeeDAO.create(employee4);
+            Assert.fail("BAD INPUT");
+        }
+        catch (Exception e) {
+            System.out.println("creation error");
+        }
+    }
+
+    @Test
     public void createTest() {
+        JdbcTestUtils.deleteFromTables(employeeDAO.jdbcTemplate, "Employee");
 
         //create
         Employee employee1 = createEmployeeObject("Zara", 11);
-        employeeDAO.create(employee1);
-        System.out.println("Create record: " + employee1);
-
-        // getById
-        Employee resultGetById = employeeDAO.getById(1);
-        Assert.assertNotNull(resultGetById);
-        Assert.assertEquals("Zara", employee1.getName());
-
+        Integer createIdEmployee = employeeDAO.create(employee1);
+        System.out.println("Create record: " + employeeDAO.listEmployee());
         int c = JdbcTestUtils.countRowsInTable(employeeDAO.jdbcTemplate, "Employee");
         Assert.assertTrue(c == 1);
 
+        // getById
+        Employee resultGetById = employeeDAO.getById(createIdEmployee);
+        Assert.assertNotNull(resultGetById);
+        System.out.println(resultGetById);
+        Assert.assertEquals("Zara", resultGetById.getName());
+
         //update
-        int emp = employeeDAO.update(1, "Jane");
+        int emp = employeeDAO.update(3, "Jane");
         int n = JdbcTestUtils.countRowsInTableWhere(employeeDAO.jdbcTemplate, "Employee", "name = 'Jane' ");
         Assert.assertTrue(n == 1);
         Assert.assertTrue(emp == 1);
@@ -54,25 +71,10 @@ public class EmployeeTemplateDAOTest {
         Assert.assertTrue(list.size() == 1);
 
         //deleteById
-        employeeDAO.deleteById(1);
+        employeeDAO.deleteById(3);
         System.out.println("List: " + employeeDAO.listEmployee());
         c = JdbcTestUtils.countRowsInTable(employeeDAO.jdbcTemplate, "Employee");
         Assert.assertTrue(c == 0);
-    }
-
-    @Test
-    public void createTestExeption() {
-
-        try {
-            Employee employee1 = createEmployeeObject("Zara", 11);
-            Employee employee2 = createEmployeeObject("Zara", 22);
-            employeeDAO.create(employee1);
-            employeeDAO.create(employee2);
-            Assert.fail("BAD INPUT");
-        }
-        catch (Exception e) {
-            System.out.println("creation error");
-        }
     }
 }
 
