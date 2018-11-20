@@ -3,8 +3,11 @@ package com.my.myspringdatabase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import javax.sql.DataSource;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 public class EmployeeAgeTemplateDAO implements EmployeeDAO {
@@ -16,10 +19,19 @@ public class EmployeeAgeTemplateDAO implements EmployeeDAO {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public void create(Employee employee) {
+    public Integer create(Employee employee) {
         String SQL = "INSERT INTO Employee (name, age) VALUES (?, ?)";
-        jdbcTemplate.update(SQL, employee.getName(), employee.getAge());
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(
+                connection -> {
+                    PreparedStatement ps = connection.prepareStatement(SQL, new String[]{"ID"});
+                    ps.setString(1, employee.getName());
+                    ps.setInt(2, employee.getAge());
+                    return ps;
+                }, keyHolder);
+        Number key = keyHolder.getKey();
         log.debug("Created Record Name = " + employee.toString());
+        return key.intValue();
     }
 
     public Employee getById(Integer id) {

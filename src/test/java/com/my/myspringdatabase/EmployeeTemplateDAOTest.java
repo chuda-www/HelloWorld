@@ -1,9 +1,11 @@
 package com.my.myspringdatabase;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.jdbc.JdbcTestUtils;
@@ -18,11 +20,18 @@ public class EmployeeTemplateDAOTest {
     @Autowired
     private EmployeeAgeTemplateDAO employeeDAO;
 
-    private static Employee createEmployeeObject(String name, Integer age) {
-        Employee employee = new Employee();
-        employee.setName(name);
-        employee.setAge(age);
-        return employee;
+    @Before
+    public void setUp() throws Exception {
+        JdbcTestUtils.deleteFromTables(employeeDAO.jdbcTemplate, "Employee");
+    }
+
+    @Test(expected = DuplicateKeyException.class)
+    public void createTestExeption() {
+
+        Employee employee3 = createEmployeeObject("Anna", 11);
+        Employee employee4 = createEmployeeObject("Anna", 22);
+        employeeDAO.create(employee3);
+        employeeDAO.create(employee4);
     }
 
     @Test
@@ -30,19 +39,19 @@ public class EmployeeTemplateDAOTest {
 
         //create
         Employee employee1 = createEmployeeObject("Zara", 11);
-        employeeDAO.create(employee1);
-        System.out.println("Create record: " + employee1);
+        Integer createIdEmployee = employeeDAO.create(employee1);
+        System.out.println("Create record: " + employeeDAO.listEmployee());
+        int rowsInTable = JdbcTestUtils.countRowsInTable(employeeDAO.jdbcTemplate, "Employee");
+        Assert.assertTrue(rowsInTable == 1);
 
         // getById
-        Employee resultGetById = employeeDAO.getById(1);
+        Employee resultGetById = employeeDAO.getById(createIdEmployee);
         Assert.assertNotNull(resultGetById);
-        Assert.assertEquals("Zara", employee1.getName());
-
-        int c = JdbcTestUtils.countRowsInTable(employeeDAO.jdbcTemplate, "Employee");
-        Assert.assertTrue(c == 1);
+        System.out.println(resultGetById);
+        Assert.assertEquals("Zara", resultGetById.getName());
 
         //update
-        int emp = employeeDAO.update(1, "Jane");
+        int emp = employeeDAO.update(createIdEmployee, "Jane");
         int n = JdbcTestUtils.countRowsInTableWhere(employeeDAO.jdbcTemplate, "Employee", "name = 'Jane' ");
         Assert.assertTrue(n == 1);
         Assert.assertTrue(emp == 1);
@@ -53,10 +62,17 @@ public class EmployeeTemplateDAOTest {
         Assert.assertTrue(list.size() == 1);
 
         //deleteById
-        employeeDAO.deleteById(1);
+        employeeDAO.deleteById(createIdEmployee);
         System.out.println("List: " + employeeDAO.listEmployee());
-        c = JdbcTestUtils.countRowsInTable(employeeDAO.jdbcTemplate, "Employee");
-        Assert.assertTrue(c == 0);
+        rowsInTable = JdbcTestUtils.countRowsInTable(employeeDAO.jdbcTemplate, "Employee");
+        Assert.assertTrue(rowsInTable == 0);
+    }
+
+    private static Employee createEmployeeObject(String name, Integer age) {
+        Employee employee = new Employee();
+        employee.setName(name);
+        employee.setAge(age);
+        return employee;
     }
 }
 
