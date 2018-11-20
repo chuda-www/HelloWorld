@@ -24,18 +24,17 @@ public class EmployeeTemplateDAOTest {
         JdbcTestUtils.deleteFromTables(employeeDAO.jdbcTemplate, "Employee");
     }
 
-    @Test
+    @Test(expected = Exception.class)
     public void createTestExeption() {
 
-        try {
-            Employee employee3 = createEmployeeObject("Anna", 11);
-            Employee employee4 = createEmployeeObject("Anna", 22);
-            employeeDAO.create(employee3);
-            employeeDAO.create(employee4);
-            Assert.fail("BAD INPUT");
-        } catch (Exception e) {
-            System.out.println("creation error");
-        }
+        Employee employee3 = createEmployeeObject("Anna", 11);
+        Employee employee4 = createEmployeeObject("Anna", 22);
+        employeeDAO.create(employee3);
+        employeeDAO.create(employee4);
+        Assert.fail("BAD INPUT");
+
+        System.out.println("creation error");
+
     }
 
     @Test
