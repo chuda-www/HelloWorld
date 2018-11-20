@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.jdbc.JdbcTestUtils;
@@ -24,17 +25,13 @@ public class EmployeeTemplateDAOTest {
         JdbcTestUtils.deleteFromTables(employeeDAO.jdbcTemplate, "Employee");
     }
 
-    @Test(expected = Exception.class)
+    @Test(expected = DuplicateKeyException.class)
     public void createTestExeption() {
 
         Employee employee3 = createEmployeeObject("Anna", 11);
         Employee employee4 = createEmployeeObject("Anna", 22);
         employeeDAO.create(employee3);
         employeeDAO.create(employee4);
-        Assert.fail("BAD INPUT");
-
-        System.out.println("creation error");
-
     }
 
     @Test
