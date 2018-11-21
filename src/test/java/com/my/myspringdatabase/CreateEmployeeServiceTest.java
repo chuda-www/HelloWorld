@@ -24,13 +24,11 @@ public class CreateEmployeeServiceTest {
     public void createEmployees() {
         Employee employee1 = createEmployeeObject("Yulia", 11);
         Employee employee2 = createEmployeeObject("Grad", 52);
-        employeeDAO.create(employee1);
-        employeeDAO.create(employee2);
         List <Employee> employeeList = new ArrayList <>();
         employeeList.add(employee1);
         employeeList.add(employee2);
         createEmployeeService.createEmployees(employeeList);
-        verify(employeeDAO, times(4)).create(anyObject());
+        verify(employeeDAO, times(2)).create(anyObject());
         System.out.print("list  " + employeeList.toString());
     }
 
