@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.util.List;
 
@@ -15,8 +14,8 @@ public class EmployeeAgeTemplateDAO implements EmployeeDAO {
     protected JdbcTemplate jdbcTemplate;
     final private static Logger log = LogManager.getLogger(EmployeeAgeTemplateDAO.class);
 
-    public EmployeeAgeTemplateDAO(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    public EmployeeAgeTemplateDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     public Integer create(Employee employee) {
