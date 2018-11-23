@@ -47,10 +47,10 @@ public class CreateEmployeeServiceDBTest {
 
     @Test
     public void createTestExeption() {
+        List <Employee> employeeList = new ArrayList <>();
+        employeeList.add(createEmployeeObject("AAA", 11));
+        employeeList.add(createEmployeeObject("AAA", 52));
         try {
-            List <Employee> employeeList = new ArrayList <>();
-            employeeList.add(createEmployeeObject("AAA", 11));
-            employeeList.add(createEmployeeObject("AAA", 52));
             createEmployeeService.createEmployees(employeeList);
         } catch (Exception e) {
             System.out.println("DuplicateKeyException");
