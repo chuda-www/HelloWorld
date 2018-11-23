@@ -56,7 +56,7 @@ public class CreateEmployeeServiceDBTest {
             System.out.println("DuplicateKeyException");
         }
         int rowsInTable1 = JdbcTestUtils.countRowsInTable(jdbcTemplate, "Employee");
-        Assert.assertTrue(rowsInTable1 == 1);
+        Assert.assertTrue(rowsInTable1 == 0);
     }
 
     private static Employee createEmployeeObject(String name, Integer age) {
