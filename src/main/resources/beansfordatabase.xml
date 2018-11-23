@@ -16,7 +16,7 @@
     </bean>
     <bean name="createEmployeeService" class="com.my.myspringdatabase.CreateEmployeeService"/>
 
-    <bean id="employeeTemplateDAO" class="com.my.myspringdatabase.EmployeeAgeTemplateDAO">
+    <bean id="employeeTemplateDAO" class="com.my.myspringdatabase.EmployeeNameTemplateDAO">
         <constructor-arg ref="jdbcTemplate"/>
     </bean>
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">

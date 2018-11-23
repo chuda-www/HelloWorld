@@ -1,6 +1,7 @@
 package com.my.myspringdatabase;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,11 @@ public class CreateEmployeeServiceDBTest {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    @Before
+    public void setUp() throws Exception {
+        JdbcTestUtils.deleteFromTables(jdbcTemplate, "Employee");
+    }
 
     @Test
     public void createEmployees() {
