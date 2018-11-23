@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.jdbc.JdbcTestUtils;
@@ -20,9 +21,12 @@ public class EmployeeTemplateDAOTest {
     @Autowired
     private EmployeeAgeTemplateDAO employeeDAO;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     @Before
     public void setUp() throws Exception {
-        JdbcTestUtils.deleteFromTables(employeeDAO.jdbcTemplate, "Employee");
+        JdbcTestUtils.deleteFromTables(jdbcTemplate, "Employee");
     }
 
     @Test(expected = DuplicateKeyException.class)
@@ -41,7 +45,7 @@ public class EmployeeTemplateDAOTest {
         Employee employee1 = createEmployeeObject("Zara", 11);
         Integer createIdEmployee = employeeDAO.create(employee1);
         System.out.println("Create record: " + employeeDAO.listEmployee());
-        int rowsInTable = JdbcTestUtils.countRowsInTable(employeeDAO.jdbcTemplate, "Employee");
+        int rowsInTable = JdbcTestUtils.countRowsInTable(jdbcTemplate, "Employee");
         Assert.assertTrue(rowsInTable == 1);
 
         // getById
@@ -52,7 +56,7 @@ public class EmployeeTemplateDAOTest {
 
         //update
         int emp = employeeDAO.update(createIdEmployee, "Jane");
-        int n = JdbcTestUtils.countRowsInTableWhere(employeeDAO.jdbcTemplate, "Employee", "name = 'Jane' ");
+        int n = JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "Employee", "name = 'Jane' ");
         Assert.assertTrue(n == 1);
         Assert.assertTrue(emp == 1);
 
@@ -64,7 +68,7 @@ public class EmployeeTemplateDAOTest {
         //deleteById
         employeeDAO.deleteById(createIdEmployee);
         System.out.println("List: " + employeeDAO.listEmployee());
-        rowsInTable = JdbcTestUtils.countRowsInTable(employeeDAO.jdbcTemplate, "Employee");
+        rowsInTable = JdbcTestUtils.countRowsInTable(jdbcTemplate, "Employee");
         Assert.assertTrue(rowsInTable == 0);
     }
 
